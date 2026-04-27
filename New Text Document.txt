@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+.page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.active {
+  display: block;
+}
+
+#page1 { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+#page2 { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+#page3 { background: linear-gradient(135deg, #11998e, #38ef7d); }
+
+h1 { margin-top: 50px; font-size: 40px; }
+h2 { font-size: 28px; }
+
+.btn {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.next { background: #000; color: white; }
+.location { background: #fff; color: black; }
+
+img {
+  max-width: 80%;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.timer {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+  <h1>Wedding Invitation</h1>
+  <h2>Sabiya ❤️ Toufiq</h2>
+  <h2>Suhel ❤️ Tabassum</h2>
+
+  <p>Venue: Roshani Palace Kudachi</p>
+
+  <button class="btn location" onclick="openMap()">📍 View Location</button>
+
+  <div class="timer" id="countdown"></div>
+
+  <br>
+  <button class="btn next" onclick="nextPage(2)">Next</button>
+
+  <audio id="music1" src="music1.mp3" loop></audio>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+  <h1>Invitation Card</h1>
+  <img src="card.jpg" alt="Invitation Card">
+
+  <br>
+  <button class="btn next" onclick="nextPage(3)">Next</button>
+
+  <audio id="music2" src="music2.mp3" loop></audio>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+  <h1>Full Invitation</h1>
+
+  <img src="img1.jpg">
+  <img src="img2.jpg">
+  <img src="img3.jpg">
+
+  <audio id="music3" src="music3.mp3" loop></audio>
+</div>
+
+<script>
+
+let currentPage = 1;
+
+function nextPage(page) {
+  document.getElementById('page' + currentPage).classList.remove('active');
+  document.getElementById('music' + currentPage).pause();
+
+  currentPage = page;
+
+  document.getElementById('page' + currentPage).classList.add('active');
+  document.getElementById('music' + currentPage).play();
+}
+
+function openMap() {
+  window.open("https://www.google.com/maps/search/?api=1&query=Roshani+Palace+Kudachi");
+}
+
+// Countdown Timer
+let weddingDate = new Date("2026-05-30T12:00:00").getTime();
+
+let timer = setInterval(function() {
+  let now = new Date().getTime();
+  let distance = weddingDate - now;
+
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+  if (distance < 0) {
+    clearInterval(timer);
+    document.getElementById("countdown").innerHTML = "Wedding Started!";
+  }
+}, 1000);
+
+// Auto play first music
+window.onload = () => {
+  document.getElementById('music1').play();
+};
+
+</script>
+
+</body>
+</html>
