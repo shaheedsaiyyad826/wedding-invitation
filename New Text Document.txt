@@ -64,7 +64,9 @@ img {
   <h1>Wedding Invitation</h1>
   <h2>Sabiya ❤️ Toufiq</h2>
   <h2>Suhel ❤️ Tabassum</h2>
-
+<p style="margin-top:10px; font-size:18px; opacity:0.8;">
+  With the blessings of our family, we invite you to celebrate our wedding
+</p>
   <p>Venue: Roshani Palace Kudachi</p>
 
   <button class="btn location" onclick="openMap()">📍 View Location</button>
